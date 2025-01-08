@@ -1,0 +1,836 @@
+<html><head><base href="https://example.com/">
+    <meta charset="UTF-8">
+    <title>America Gerl Gym</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS Styles -->
+    <style>
+        :root {
+            --primary-color: #f1c40f; /* Yellow */
+            --secondary-color: #9b59b6; /* Purple */
+            --background-color: #f5f5f5; /* Light Grey */
+            --text-color: #333;
+            --header-background: rgba(34, 34, 34, 0.8);
+            --button-background: var(--primary-color);
+            --button-hover-background: var(--secondary-color);
+            --animate-duration: 20s;
+            --footer-background: #222;
+            --footer-text-color: #fff;
+        }
+
+        body {
+            margin: 0;
+            padding-top: 60px;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: linear-gradient(270deg, #f5f5f5, var(--secondary-color), #f5f5f5, var(--primary-color), #f5f5f5, var(--secondary-color), #f5f5f5, var(--primary-color));
+            background-size: 1600% 1600%;
+            animation: gradientBG var(--animate-duration) ease infinite;
+            color: var(--text-color);
+            scroll-behavior: smooth;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        body.dark-mode {
+            --primary-color: #f39c12; /* Darker Yellow */
+            --secondary-color: #8e44ad; /* Darker Purple */
+            --background-color: #2c3e50; /* Dark Grey */
+            --text-color: #ecf0f1;
+            --header-background: rgba(44, 62, 80, 0.9);
+            --button-background: var(--primary-color);
+            --button-hover-background: var(--secondary-color);
+            --footer-background: #1a252f;
+            --footer-text-color: #ecf0f1;
+        }
+
+        body {
+            background-color: var(--background-color);
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            20% { background-position: 50% 100%; }
+            40% { background-position: 100% 50%; }
+            60% { background-position: 50% 0%; }
+            80% { background-position: 0% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background-color: var(--header-background);
+            color: #fff;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: slideDown 0.5s ease-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav {
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        nav ul li:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+        nav ul li:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+        nav ul li:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        nav ul li:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+        nav ul li:nth-child(5) {
+            animation-delay: 1s;
+        }
+        nav ul li:nth-child(6) {
+            animation-delay: 1.2s;
+        }
+        nav ul li:nth-child(7) {
+            animation-delay: 1.4s;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Dark Mode Toggle Button */
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            padding: 0;
+            margin-left: 20px;
+            transition: transform 0.3s;
+        }
+
+        .dark-mode-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+            transition: fill 0.3s, transform 0.3s;
+        }
+
+        .dark-mode-toggle:hover svg {
+            fill: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(34,34,34,0.7), rgba(34,34,34,0.7)), linear-gradient(270deg, #f5f5f5, var(--secondary-color), #f5f5f5, var(--primary-color));
+            background-size: 1600% 1600%;
+            animation: gradientBG var(--animate-duration) ease infinite, fadeOverlay 2s ease-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.5s ease;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(34,34,34,0.3);
+            animation: fadeIn 2s ease-out;
+        }
+
+        .hero div {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(270deg, #f5f5f5, var(--secondary-color), #f5f5f5, var(--primary-color));
+            background-size: 800% 800%;
+            animation: gradientBG var(--animate-duration) ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .animated-button {
+            background-color: var(--button-background);
+            border: none;
+            padding: 15px 30px;
+            color: #fff;
+            font-size: 1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .animated-button:hover {
+            background-color: var(--button-hover-background);
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes fadeOverlay {
+            from { opacity: 0.3; }
+            to { opacity: 0.3; }
+        }
+        @keyframes fadeInHeader {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        .about, .services, .contact, .trainers, .testimonials, .membership {
+            background-color: #fff;
+            margin-bottom: 40px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, background-color 0.5s ease, color 0.5s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUpSection 1s forwards;
+        }
+
+        body.dark-mode .about, 
+        body.dark-mode .services, 
+        body.dark-mode .contact, 
+        body.dark-mode .trainers, 
+        body.dark-mode .testimonials, 
+        body.dark-mode .membership {
+            background-color: #34495e;
+            color: #ecf0f1;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .about {
+            animation-delay: 1s;
+        }
+        .services {
+            animation-delay: 1.2s;
+        }
+        .contact {
+            animation-delay: 1.4s;
+        }
+        .trainers {
+            animation-delay: 1.6s;
+        }
+        .testimonials {
+            animation-delay: 1.8s;
+        }
+        .membership {
+            animation-delay: 2s;
+        }
+        .about:hover, .services:hover, .contact:hover, .trainers:hover, .testimonials:hover, .membership:hover {
+            transform: translateY(-10px);
+        }
+
+        .services .service-item, .trainers .trainer-item, .testimonials .testimonial-item, .membership .plan-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideInLeft 0.5s forwards;
+        }
+
+        .services .service-item:nth-child(1),
+        .trainers .trainer-item:nth-child(1),
+        .testimonials .testimonial-item:nth-child(1),
+        .membership .plan-item:nth-child(1) {
+            animation-delay: 1.6s;
+        }
+        .services .service-item:nth-child(2),
+        .trainers .trainer-item:nth-child(2),
+        .testimonials .testimonial-item:nth-child(2),
+        .membership .plan-item:nth-child(2) {
+            animation-delay: 1.8s;
+        }
+        .services .service-item:nth-child(3),
+        .trainers .trainer-item:nth-child(3),
+        .testimonials .testimonial-item:nth-child(3),
+        .membership .plan-item:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .services .service-item svg,
+        .trainers .trainer-item svg,
+        .testimonials .testimonial-item svg,
+        .membership .plan-item svg {
+            width: 60px;
+            height: 60px;
+            margin-right: 20px;
+            fill: var(--primary-color);
+            transition: fill 0.3s;
+        }
+
+        body.dark-mode .services .service-item svg,
+        body.dark-mode .trainers .trainer-item svg,
+        body.dark-mode .testimonials .testimonial-item svg,
+        body.dark-mode .membership .plan-item svg {
+            fill: var(--secondary-color);
+        }
+
+        .services .service-item:hover svg,
+        .trainers .trainer-item:hover svg,
+        .testimonials .testimonial-item:hover svg,
+        .membership .plan-item:hover svg {
+            fill: var(--secondary-color);
+        }
+
+        footer {
+            background-color: var(--footer-background);
+            color: var(--footer-text-color);
+            text-align: center;
+            padding: 20px 0;
+            opacity: 0;
+            animation: fadeInUpFooter 1s forwards;
+            animation-delay: 2.2s;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        footer a {
+            color: var(--primary-color);
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: var(--secondary-color);
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUpForm 0.5s forwards;
+        }
+
+        body.dark-mode form input, 
+        body.dark-mode form textarea {
+            background-color: #34495e;
+            color: #ecf0f1;
+            border: 1px solid #7f8c8d;
+        }
+
+        form input:nth-child(1) {
+            animation-delay: 2.4s;
+        }
+        form input:nth-child(2) {
+            animation-delay: 2.6s;
+        }
+        form textarea {
+            animation-delay: 2.8s;
+        }
+        form button {
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUpButton 0.5s forwards;
+            animation-delay: 3s;
+        }
+        form button.animated-button {
+            animation: none;
+        }
+
+        @keyframes fadeInUpSection {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInUpFooter {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUpForm {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUpButton {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+            nav ul li {
+                margin: 10px 0;
+            }
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            .hero p {
+                font-size: 1.2em;
+            }
+            .services .service-item, .trainers .trainer-item, .testimonials .testimonial-item, .membership .plan-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .services .service-item svg,
+            .trainers .trainer-item svg,
+            .testimonials .testimonial-item svg,
+            .membership .plan-item svg {
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Header Icons */
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInHeader 1s forwards;
+        }
+        .section-header svg {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            fill: var(--primary-color);
+            transition: fill 0.3s, transform 0.3s;
+        }
+        .section-header:hover svg {
+            fill: var(--secondary-color);
+            transform: scale(1.1);
+        }
+        .section-header h2 {
+            font-size: 2.5em;
+            margin: 0;
+            color: var(--secondary-color);
+            background: linear-gradient(270deg, #f5f5f5, var(--secondary-color), #f5f5f5, var(--primary-color));
+            background-size: 800% 800%;
+            animation: gradientBG var(--animate-duration) ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+    </style>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="Index.html">Inicio</a></li>
+                <li><a href="Index.html">Sobre Nosotros</a></li>
+                <li><a href="Index.html">Servicios</a></li>
+                <li><a href="Index.html">Entrenadores</a></li>
+                <li><a href="Index.html">Planes</a></li>
+                <li><a href="Index.html">Testimonios</a></li>
+                <li><a href="Index.html">Contacto</a></li>
+                <li>
+                    <button class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle Dark Mode">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3.1a1 1 0 011 1v1.8a1 1 0 11-2 0V4.1a1 1 0 011-1zm5.66 2.34a1 1 0 011.41 1.41l-1.27 1.27a1 1 0 11-1.41-1.41l1.27-1.27zM21 11a1 1 0 110 2h-1.8a1 1 0 110-2H21zm-2.34 5.66a1 1 0 11-1.41 1.41l-1.27-1.27a1 1 0 111.41-1.41l1.27 1.27zM12 19.9a1 1 0 01-1-1v-1.8a1 1 0 112 0v1.8a1 1 0 01-1 1zm-5.66-2.34a1 1 0 01-1.41-1.41l1.27-1.27a1 1 0 111.41 1.41L5.34 7.34zM3 13a1 1 0 110-2h1.8a1 1 0 110 2H3zm2.34-5.66a1 1 0 011.41-1.41l1.27 1.27a1 1 0 11-1.41 1.41L5.34 7.34zM12 6.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div>
+            <h1>Bienvenido a America Gerl Gym</h1>
+            <p>Transforma tu cuerpo y mente en nuestro lujoso gimnasio</p>
+            <button class="animated-button">Únete Ahora</button>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="section-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="30" stroke="none" fill="url(#aboutGradient)"/>
+                <defs>
+                    <linearGradient id="aboutGradient" gradientTransform="rotate(45)">
+                        <stop offset="0%" stop-color="var(--primary-color)" />
+                        <stop offset="100%" stop-color="var(--secondary-color)" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            <h2>Sobre Nosotros</h2>
+        </div>
+        <p>En America Gerl Gym, nos dedicamos a ofrecer una experiencia de fitness premium. Contamos con instalaciones de primera clase, entrenadores altamente capacitados y programas personalizados para ayudarte a alcanzar tus metas de salud y bienestar.</p>
+    </section>
+
+    <section class="services" id="services">
+        <div class="section-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <rect x="12" y="12" width="40" height="40" rx="8" ry="8" fill="url(#servicesGradient)" stroke="none"/>
+                <defs>
+                    <linearGradient id="servicesGradient" gradientTransform="rotate(45)">
+                        <stop offset="0%" stop-color="var(--secondary-color)" />
+                        <stop offset="100%" stop-color="var(--primary-color)" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            <h2>Nuestros Servicios</h2>
+        </div>
+        <div class="service-item">
+            <!-- Inline SVG Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="30" stroke="none" fill="var(--primary-color)" />
+                <path d="M32 16v32M16 32h32" stroke="white" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <div>
+                <h3>Entrenamiento Personalizado</h3>
+                <p>Programas de entrenamiento adaptados a tus necesidades específicas para maximizar tus resultados.</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <rect x="12" y="12" width="40" height="40" rx="8" ry="8" fill="var(--primary-color)" />
+                <path d="M12 32h40M32 12v40" stroke="white" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <div>
+                <h3>Clases Grupales</h3>
+                <p>Únete a nuestras dinámicas clases grupales para mantener la motivación y disfrutar del ejercicio.</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <polygon points="32,4 60,60 4,60" fill="var(--primary-color)" />
+                <circle cx="32" cy="32" r="10" fill="white"/>
+            </svg>
+            <div>
+                <h3>Nutrición y Dietética</h3>
+                <p>Asesoría nutricional para complementar tu entrenamiento y optimizar tus resultados.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="trainers" id="trainers">
+        <div class="section-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="30" fill="url(#trainersGradient)" stroke="none"/>
+                <defs>
+                    <linearGradient id="trainersGradient" gradientTransform="rotate(45)">
+                        <stop offset="0%" stop-color="var(--primary-color)" />
+                        <stop offset="100%" stop-color="var(--secondary-color)" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            <h2>Nuestros Entrenadores</h2>
+        </div>
+        <div class="trainer-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="30" fill="var(--primary-color)" />
+                <path d="M32 16v32M16 32h32" stroke="white" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <div>
+                <h3>Marcos</h3>
+                <p>Especialista en entrenamiento de fuerza y acondicionamiento físico, con más de 10 años de experiencia.</p>
+            </div>
+        </div>
+        <div class="trainer-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <rect x="12" y="12" width="40" height="40" rx="8" ry="8" fill="var(--primary-color)" />
+                <path d="M12 32h40M32 12v40" stroke="white" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <div>
+                <h3>Adrian Concepcíon</h3>
+                <p>Entrenadora personal certificada en nutrición y bienestar integral, comprometida con tus metas.</p>
+            </div>
+        </div>
+        <div class="trainer-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <polygon points="32,4 60,60 4,60" fill="var(--secondary-color)" />
+                <circle cx="32" cy="32" r="10" fill="var(--primary-color)"/>
+            </svg>
+            <div>
+                <h3>Y más entrenadores</h3>
+                <p>Especialista en entrenamiento funcional y rehabilitación deportiva, ayudándote a superar tus límites.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="membership" id="membership">
+        <div class="section-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <polygon points="32,4 60,60 4,60" fill="var(--secondary-color)" stroke="none"/>
+                <circle cx="32" cy="32" r="10" fill="var(--primary-color)"/>
+            </svg>
+            <h2>Planes de Membresía</h2>
+        </div>
+        <div class="plan-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="30" fill="var(--primary-color)" />
+                <path d="M32 16v32M16 32h32" stroke="white" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <div>
+                <h3>Básico</h3>
+                <p>Acceso ilimitado al gimnasio durante horarios regulares.</p>
+                <p><strong>Precio:</strong> $50/mes</p>
+            </div>
+        </div>
+        <div class="plan-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <rect x="12" y="12" width="40" height="40" rx="8" ry="8" fill="var(--primary-color)" />
+                <path d="M12 32h40M32 12v40" stroke="white" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <div>
+                <h3>Premium</h3>
+                <p>Acceso 24/7, clases grupales ilimitadas y asesoramiento nutricional.</p>
+                <p><strong>Precio:</strong> $80/mes</p>
+            </div>
+        </div>
+        <div class="plan-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <polygon points="32,4 60,60 4,60" fill="var(--secondary-color)" />
+                <circle cx="32" cy="32" r="10" fill="var(--primary-color)"/>
+            </svg>
+            <div>
+                <h3>VIP</h3>
+                <p>Membresía completa con acceso exclusivo a áreas premium y sesiones privadas.</p>
+                <p><strong>Precio:</strong> $120/mes</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="30" fill="var(--secondary-color)" />
+                <path d="M32 16v32M16 32h32" stroke="white" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <h2>Testimonios</h2>
+        </div>
+        <div class="testimonial-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="30" fill="var(--primary-color)" />
+                <path d="M32 16v32M16 32h32" stroke="white" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <div>
+                <h3>Ana López</h3>
+                <p>"America Gerl Gym transformó mi vida. Los entrenadores son excepcionales y el ambiente es motivador."</p>
+            </div>
+        </div>
+        <div class="testimonial-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <rect x="12" y="12" width="40" height="40" rx="8" ry="8" fill="var(--primary-color)" />
+                <path d="M12 32h40M32 12v40" stroke="white" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <div>
+                <h3>Luis Martínez</h3>
+                <p>"Las instalaciones son de primera y las clases grupales me han ayudado a mantenerme constante."</p>
+            </div>
+        </div>
+        <div class="testimonial-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <polygon points="32,4 60,60 4,60" fill="var(--secondary-color)" />
+                <circle cx="32" cy="32" r="10" fill="var(--primary-color)"/>
+            </svg>
+            <div>
+                <h3>Pedro Ramírez</h3>
+                <p>"Gracias a America Gerl Gym he alcanzado mis metas de salud y bienestar de una manera elegante y eficiente."</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="section-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="30" fill="var(--primary-color)" />
+                <path d="M32 16v32M16 32h32" stroke="white" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <h2>Contacto</h2>
+        </div>
+        <form action="https://example.com/contact" method="post">
+            <input type="text" name="nombre" placeholder="Nombre" required>
+            <input type="email" name="correo" placeholder="Correo Electrónico" required>
+            <textarea name="mensaje" rows="5" placeholder="Mensaje" required></textarea>
+            <button type="submit" class="animated-button">Enviar</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 America Gerl Gym. Todos los derechos reservados.</p>
+        <div>
+            <a href="https://www.facebook.com/AmericasGirlsGym/?locale=es_LA">Facebook</a>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Animations and Dark Mode -->
+    <script>
+        gsap.from('.hero p', { duration: 1, y: 50, opacity: 0, delay: 0.5, ease: "bounce" });
+        gsap.from('.animated-button', { duration: 1, scale: 0, opacity: 0, delay: 1, ease: "back.out(1.7)" });
+
+        // Additional Animations
+        // GSAP ScrollTrigger for service items and sections
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('.about, .services, .contact, .trainers, .testimonials, .membership').forEach(section => {
+            gsap.from(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out"
+            });
+        });
+
+        gsap.utils.toArray('.service-item, .trainer-item, .testimonial-item, .plan-item').forEach(item => {
+            gsap.from(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                },
+                x: -50,
+                opacity: 0,
+                duration: 0.5,
+                ease: "power2.out"
+            });
+        });
+
+        gsap.from('footer', {
+            scrollTrigger: {
+                trigger: 'footer',
+                start: "top 90%",
+                toggleActions: "play none none none"
+            },
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out"
+        });
+
+        // Testimonials Carousel
+        let testimonials = gsap.utils.toArray('.testimonial-item');
+        let current = 0;
+
+        function showTestimonial(index) {
+            gsap.to(testimonials, { duration: 0.5, opacity: 0, y: 20, display: 'none' });
+            gsap.to(testimonials[index], { duration: 0.5, opacity: 1, y: 0, display: 'flex' });
+        }
+
+        showTestimonial(current);
+
+        setInterval(() => {
+            current = (current + 1) % testimonials.length;
+            showTestimonial(current);
+        }, 5000);
+
+        // Header Animation
+        gsap.utils.toArray('.section-header').forEach(header => {
+            gsap.from(header, {
+                scrollTrigger: {
+                    trigger: header,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                y: -20,
+                opacity: 0,
+                duration: 1,
+                ease: "expo.out"
+            });
+        });
+
+        // Dark Mode Toggle
+        const toggleButton = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+
+        // Check for saved user preference, if any, on load of the website
+        if (localStorage.getItem('dark-mode') === 'enabled') {
+            body.classList.add('dark-mode');
+        }
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('dark-mode', 'enabled');
+            } else {
+                localStorage.setItem('dark-mode', 'disabled');
+            }
+        });
+    </script>
+</body>
+</html>
